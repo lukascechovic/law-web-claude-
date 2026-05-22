@@ -27,13 +27,13 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
       {/* Image gallery */}
       <div className="w-full lg:w-1/2 flex flex-col gap-3">
         {mainImage && (
-          <div className="relative aspect-[4/3] w-full overflow-hidden bg-cream-200">
+          <div className="relative w-full h-[clamp(320px,80vw,800px)] lg:h-[800px] overflow-hidden bg-cream-200">
             <Image
               src={mainImage}
               alt={`${title} — product image ${activeImage + 1}`}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover transition-opacity duration-300"
+              className="object-contain transition-opacity duration-300"
               priority={activeImage === 0}
             />
           </div>
@@ -57,7 +57,7 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
                   alt={`${title} thumbnail ${i + 1}`}
                   fill
                   sizes="56px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </button>
             ))}
