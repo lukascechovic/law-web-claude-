@@ -17,7 +17,16 @@
       "mcp__github__list_branches",
       "mcp__github__list_commits",
       "mcp__github__create_pull_request",
-      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\\\\content\\\\images\\\\brand\\\\logo-light.png\"\\); \"Width: $\\($img.Width\\), Height: $\\($img.Height\\)\"; $img.Dispose\\(\\))"
+      "PowerShell(Add-Type -AssemblyName System.Drawing; $img = [System.Drawing.Image]::FromFile\\(\"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\\\\content\\\\images\\\\brand\\\\logo-light.png\"\\); \"Width: $\\($img.Width\\), Height: $\\($img.Height\\)\"; $img.Dispose\\(\\))",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\\\\content\\\\images\" -Recurse -File)",
+      "Bash(Select-Object FullName, Length)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(node scripts/copy-assets.mjs)",
+      "Bash(npm run *)",
+      "Bash(git reset *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" -Recurse -Directory)",
+      "Bash(Select-Object -First 20)",
+      "Bash(Format-Table FullName)"
     ]
   }
 }

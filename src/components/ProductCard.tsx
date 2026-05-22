@@ -20,14 +20,14 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
     <article
       id={id}
       data-testid={`product-card-${id}`}
-      className={`flex flex-col lg:flex-row gap-12 items-center ${
+      className={`flex flex-col lg:flex-row gap-12 items-start ${
         reverse ? 'lg:flex-row-reverse' : ''
       }`}
     >
       {/* Image gallery */}
       <div className="w-full lg:w-1/2 flex flex-col gap-3">
         {mainImage && (
-          <div className="relative w-full h-[clamp(320px,80vw,800px)] lg:h-[800px] overflow-hidden bg-cream-200">
+          <div className="relative w-full h-[clamp(300px,55vh,600px)] overflow-hidden rounded-lg bg-cream-200">
             <Image
               src={mainImage}
               alt={`${title} — product image ${activeImage + 1}`}
@@ -45,7 +45,7 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
               <button
                 key={src}
                 onClick={() => setActiveImage(i)}
-                className={`relative w-14 h-14 overflow-hidden border-2 transition-colors ${
+                className={`relative w-14 h-14 shrink-0 overflow-hidden rounded border-2 transition-colors ${
                   i === activeImage
                     ? 'border-forest-600'
                     : 'border-cream-200 hover:border-bark-500'
@@ -57,7 +57,7 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
                   alt={`${title} thumbnail ${i + 1}`}
                   fill
                   sizes="56px"
-                  className="object-contain"
+                  className="object-cover"
                 />
               </button>
             ))}

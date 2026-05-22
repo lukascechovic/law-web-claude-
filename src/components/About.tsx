@@ -35,17 +35,17 @@ export default function About({ content }: AboutProps) {
 
         {/* Image mosaic */}
         <div className="grid grid-cols-2 gap-3">
-          {aboutImages.slice(0, 4).map((img, i) => (
+          {aboutImages.slice(0, 3).map((img, i) => (
             <div
               key={img.src}
-              className={`relative overflow-hidden ${i === 0 ? 'col-span-2 aspect-[16/7]' : 'aspect-square'}`}
+              className={`relative overflow-hidden rounded-lg ${i === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-contain transition-transform duration-500 hover:scale-105"
+                className="object-cover transition-transform duration-500 hover:scale-105"
               />
             </div>
           ))}
