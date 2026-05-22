@@ -10,7 +10,7 @@ export default function Products({ products }: ProductsProps) {
     <section
       id="products"
       data-testid="products-section"
-      className="py-24 px-6 bg-cream-100"
+      className="py-24 px-6 bg-cream-100/75"
     >
       <div className="mx-auto max-w-7xl">
         {/* Section header */}

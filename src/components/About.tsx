@@ -21,7 +21,7 @@ export default function About({ content }: AboutProps) {
     <section
       id="about"
       data-testid="about-section"
-      className="py-24 px-6 bg-cream-50"
+      className="py-24 px-6 bg-cream-50/75"
     >
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Text */}
