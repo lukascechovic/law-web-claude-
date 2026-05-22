@@ -14,6 +14,7 @@
     "test:ui": "playwright test --ui"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.469.0",
     "next": "^15.0.0",
@@ -22,7 +23,8 @@
     "react-dom": "^19.0.0",
     "remark": "^15.0.1",
     "remark-html": "^16.0.1",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.49.0",

@@ -26,7 +26,14 @@
       "Bash(git reset *)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" -Recurse -Directory)",
       "Bash(Select-Object -First 20)",
-      "Bash(Format-Table FullName)"
+      "Bash(Format-Table FullName)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" remote -v)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" branch -a)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" log origin/main..master --oneline)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" log master..origin/main --oneline)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" tag v1.0-beta)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin master:main)",
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin v1.0-beta)"
     ]
   }
 }
