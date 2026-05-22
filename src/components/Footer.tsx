@@ -52,7 +52,7 @@ export default function Footer() {
           </h3>
           <div className="flex gap-4">
             <a
-              href="https://www.instagram.com/lukasarcheryworks"
+              href="https://www.instagram.com/lukas.archery.works"
               aria-label="Instagram"
               className="text-cream-300 hover:text-cream-50 transition-colors"
             >

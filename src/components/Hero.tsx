@@ -1,6 +1,11 @@
 import VideoPlayer from './VideoPlayer';
 
-export default function Hero() {
+interface HeroProps {
+  videoSrc: string;
+  videoPosition: string;
+}
+
+export default function Hero({ videoSrc, videoPosition }: HeroProps) {
   return (
     <section
       data-testid="hero-section"
@@ -8,11 +13,12 @@ export default function Hero() {
     >
       {/* Background video */}
       <VideoPlayer
-        src="/videos/hba_filip1.mp4"
+        src={videoSrc}
         autoPlay
         controls={false}
         loop
         className="absolute inset-0 w-full h-full object-cover opacity-60"
+        objectPosition={videoPosition}
       />
 
       {/* Gradient overlay */}

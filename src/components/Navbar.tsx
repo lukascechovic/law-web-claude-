@@ -35,8 +35,9 @@ export default function Navbar() {
           <Image
             src="/images/brand/logo-light.png"
             alt="Lukas Archery Works logo"
-            width={120}
+            width={240}
             height={40}
+            priority
             className="h-9 w-auto object-contain"
           />
         </Link>

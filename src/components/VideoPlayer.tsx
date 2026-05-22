@@ -7,6 +7,7 @@ interface VideoPlayerProps {
   controls?: boolean;
   loop?: boolean;
   className?: string;
+  objectPosition?: string;
 }
 
 export default function VideoPlayer({
@@ -16,6 +17,7 @@ export default function VideoPlayer({
   controls = true,
   loop = false,
   className = '',
+  objectPosition,
 }: VideoPlayerProps) {
   return (
     <video
@@ -27,6 +29,7 @@ export default function VideoPlayer({
       playsInline
       controls={controls}
       className={className}
+      style={objectPosition ? { objectPosition } : undefined}
     />
   );
 }
