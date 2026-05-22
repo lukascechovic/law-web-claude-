@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-cream-100 text-stone-dark font-sans;
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-block px-8 py-3 bg-forest-600 text-cream-50 font-sans font-medium
+           tracking-wide uppercase text-sm transition-colors duration-200
+           hover:bg-forest-700 focus:outline-none focus:ring-2 focus:ring-forest-600 focus:ring-offset-2;
+  }
+
+  .section-label {
+    @apply text-bark-500 font-sans font-medium tracking-[0.2em] uppercase text-xs;
+  }
+}
