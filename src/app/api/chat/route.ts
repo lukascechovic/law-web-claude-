@@ -1,6 +1,7 @@
 import { getProducts } from '@/lib/products';
 import { buildGrounding } from '@/lib/grounding';
 import { streamChat, llmConfigFromEnv, type ChatMessage } from '@/lib/llm';
+import { recentTurns } from '@/lib/memory';
 import {
   checkRateLimit,
   upstashStore,
@@ -14,6 +15,10 @@ export const runtime = 'nodejs';
 
 // Server-side message cap: bounds prompt size and LLM cost regardless of client.
 const MAX_MESSAGE_CHARS = 500;
+
+// How many recent turns of memory to forward to the LLM. Enough for follow-up
+// questions ("what about its price?") without growing the prompt unbounded.
+const MAX_MEMORY_TURNS = 8;
 
 function badRequest(message: string): Response {
   return new Response(message, { status: 400 });
@@ -89,7 +94,7 @@ export async function POST(req: Request): Promise<Response> {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        for await (const token of streamChat([system, ...turns], config)) {
+        for await (const token of streamChat([system, ...recentTurns(turns, MAX_MEMORY_TURNS)], config)) {
           controller.enqueue(encoder.encode(token));
         }
       } catch {
