@@ -9,6 +9,7 @@ out/
 public/images/
 public/videos/
 _old_variants/
+*.tsbuildinfo
 
 # Test artifacts
 test-results/

@@ -114,6 +114,23 @@ test('each product card has a feature list', async ({ page }) => {
   }
 });
 
+test('product cards render price and specs from the content model', async ({ page }) => {
+  await expect(page.locator('[data-testid="product-price-wings"]')).toBeVisible();
+  await expect(page.locator('[data-testid="product-specs-wings"]')).toBeVisible();
+});
+
+test('supported nocking techniques are accurate per product', async ({ page }) => {
+  // ARC supports both Slavic and Thumb.
+  const arc = page.locator('[data-testid="product-techniques-arc"]');
+  await expect(arc).toContainText('Slavic');
+  await expect(arc).toContainText('Thumb');
+
+  // HORIZON supports only Slavic — must not claim Thumb (CONTEXT.md).
+  const horizon = page.locator('[data-testid="product-techniques-horizon"]');
+  await expect(horizon).toContainText('Slavic');
+  await expect(horizon).not.toContainText('Thumb');
+});
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 test('footer is present', async ({ page }) => {

@@ -4,15 +4,14 @@ import About from '@/components/About';
 import Products from '@/components/Products';
 import Footer from '@/components/Footer';
 import BackgroundComponents from '@/components/ui/background-components';
-import { getAboutContent, getProductsContent } from '@/lib/markdown';
+import { getAboutContent } from '@/lib/markdown';
+import { getProducts } from '@/lib/products';
 import { getHeroVideoConfig } from '@/lib/heroVideo';
 
 export default async function Home() {
-  const [aboutContent, products, heroVideo] = await Promise.all([
-    getAboutContent(),
-    getProductsContent(),
-    Promise.resolve(getHeroVideoConfig()),
-  ]);
+  const aboutContent = await getAboutContent();
+  const products = getProducts();
+  const heroVideo = getHeroVideoConfig();
 
   return (
     <div className="min-h-screen bg-[#fafafa]">

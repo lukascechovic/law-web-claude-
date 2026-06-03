@@ -13,6 +13,9 @@ npm test                          # Run full Playwright suite
 npx playwright test --grep "hero" # Run tests matching a section name
 npx playwright show-report        # Open HTML test report after a run
 
+npm run test:unit                 # Run Vitest unit suite (lib modules)
+npm run test:unit:watch           # Vitest in watch mode
+
 node scripts/copy-assets.mjs      # Manually sync content/ -> public/
 ```
 
@@ -25,9 +28,10 @@ Dev server must be running (or Playwright starts it automatically via `webServer
 Content originates in `content/` (markdown text, WebP images, MP4 videos). The `scripts/copy-assets.mjs` script mirrors it into `public/` so Next.js `<Image>` optimization can serve it. This runs automatically via `predev`/`prebuild` npm hooks. **Never edit files directly in `public/`** — they are overwritten on every run.
 
 ```
-content/texts/*.md      → src/lib/markdown.ts → page.tsx (server component)
-content/images/{id}/    → public/images/{id}/ → <Image src="/images/{id}/..." />
-content/videos/         → public/videos/      → <video src="/videos/..." />
+content/texts/background.md → src/lib/markdown.ts  → page.tsx (About)
+content/products/{id}.md    → src/lib/products.ts  → page.tsx (Products)
+content/images/{id}/        → public/images/{id}/  → <Image src="/images/{id}/..." />
+content/videos/             → public/videos/       → <video src="/videos/..." />
 ```
 
 ### Server vs client boundary
@@ -38,11 +42,13 @@ content/videos/         → public/videos/      → <video src="/videos/..." />
 - `src/components/VideoPlayer.tsx` — `'use client'` (wraps `<video>`)
 - `src/components/ProductCard.tsx` — `'use client'` (image gallery `activeImage` state)
 
-### Markdown parsing (`src/lib/markdown.ts`)
+### About content (`src/lib/markdown.ts`)
 
 `getAboutContent()` — reads `content/texts/background.md`, converts to HTML via `remark → remark-html`, returns `{ title, htmlContent }`. Rendered with `dangerouslySetInnerHTML` inside a Tailwind `prose` wrapper.
 
-`getProductsContent()` — reads `content/texts/products.md`. Splits on `## ` headings to extract product sections, matches each to a known id (`wings` | `arc` | `horizon`) via regex, parses bullet lines as `features[]`, and reads `public/images/{id}/` to build `images[]`. Returns `Product[]`.
+### Product catalog (`src/lib/products.ts`)
+
+The single source of truth for products (site + chatbot grounding), per **ADR-0003**. `getProducts()` / `getProduct(id)` **discover products dynamically** from `content/products/*.md` — the id is the filename, there is **no hardcoded allowlist** (do not reintroduce one). Each file's frontmatter carries `title`, `tagline`, `price`, an ordered `specs` list (`[{label, value}]`), and a `techniques` array (e.g. Slavic / Thumb); the body's `-` bullets are `features[]`. Images are collected and sorted from `public/images/{id}/`. Malformed/missing files (bad YAML, no `title`) are omitted gracefully rather than crashing. Both functions accept an optional `{ contentDir, imagesDir }` for testability. Unit-tested in `src/lib/products.test.ts` (Vitest).
 
 ### Tailwind design tokens
 
@@ -73,11 +79,15 @@ All decorative lucide-react SVG icons must have `aria-hidden="true"` — Chromiu
 
 ### Adding/replacing product images
 
-Drop WebP files into `content/images/{wings|arc|horizon}/` following the naming convention `{product}-NN.webp`. They appear in the gallery automatically after the next `dev`/`build` — `getProductsContent()` reads the directory at build time and sorts alphabetically.
+Drop WebP files into `content/images/{id}/` following the naming convention `{id}-NN.webp`. They appear in the gallery automatically after the next `dev`/`build` — `getProduct()` reads the directory at build time and sorts alphabetically. `scripts/copy-assets.mjs` discovers image folders dynamically, so a new folder needs no code change.
+
+### Adding a new product
+
+Create `content/products/{id}.md` with frontmatter (`title`, `tagline`, `price`, `specs`, `techniques`) and a `-` bullet body for features, plus a `content/images/{id}/` folder. It appears on the site (and in chatbot grounding) with **zero code changes** — id is the filename (ADR-0003).
 
 ### Editing section text
 
-Edit `content/texts/background.md` (About section) or `content/texts/products.md` (product features). The markdown parser expects the products file to use `## N.\t Title containing PRODUCTNAME` headings and `-` bullet lists.
+Edit `content/texts/background.md` (About section) or the relevant `content/products/{id}.md` (product copy, price, specs, techniques, features).
 
 ### Adding video content
 

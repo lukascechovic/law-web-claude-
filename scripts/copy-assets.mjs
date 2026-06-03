@@ -8,13 +8,18 @@ const root = join(__dirname, '..');
 
 const IMAGE_EXTENSIONS = new Set(['.webp', '.jpg', '.jpeg', '.png']);
 
-const imageCopies = [
-  ['content/images/brand',   'public/images/brand'],
-  ['content/images/about',   'public/images/about'],
-  ['content/images/wings',   'public/images/wings'],
-  ['content/images/arc',     'public/images/arc'],
-  ['content/images/horizon', 'public/images/horizon'],
-];
+// Discover every image folder under content/images/ dynamically, so adding a new
+// product (or section) is a content edit — drop a folder, no code change here.
+// This mirrors the dynamic product discovery in src/lib/products.ts (ADR-0003).
+const imageSourceRoot = 'content/images';
+const imageCopies = existsSync(join(root, imageSourceRoot))
+  ? readdirSync(join(root, imageSourceRoot), { withFileTypes: true })
+      .filter(entry => entry.isDirectory())
+      .map(entry => [
+        `${imageSourceRoot}/${entry.name}`,
+        `public/images/${entry.name}`,
+      ])
+  : [];
 
 const binaryCopies = [
   ['content/videos',         'public/videos'],

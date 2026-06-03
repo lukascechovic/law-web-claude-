@@ -1,4 +1,4 @@
-import type { Product } from '@/lib/markdown';
+import type { Product } from '@/lib/products';
 import ProductCard from './ProductCard';
 
 interface ProductsProps {

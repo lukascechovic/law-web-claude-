@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
-import type { Product } from '@/lib/markdown';
+import type { Product } from '@/lib/products';
 
 interface ProductCardProps {
   product: Product;
@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, reverse = false }: ProductCardProps) {
   const [activeImage, setActiveImage] = useState(0);
-  const { id, title, features, images } = product;
+  const { id, title, tagline, price, specs, techniques, features, images } = product;
 
   const mainImage = images[activeImage] ?? images[0];
 
@@ -66,12 +66,26 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
       </div>
 
       {/* Content */}
-      <div className="w-full lg:w-1/2">
+      <div className="w-full lg:w-1/2" data-testid={`product-content-${id}`}>
         <p className="section-label mb-2">{id.toUpperCase()}</p>
-        <h3 className="font-serif text-3xl md:text-4xl text-forest-900 mb-6 leading-snug">
+        <h3 className="font-serif text-3xl md:text-4xl text-forest-900 mb-3 leading-snug">
           {title}
         </h3>
-        <ul className="space-y-2">
+        {tagline && (
+          <p className="font-sans text-stone-mid text-base leading-relaxed mb-4">
+            {tagline}
+          </p>
+        )}
+        {price && (
+          <p
+            data-testid={`product-price-${id}`}
+            className="font-serif text-xl text-forest-700 mb-6"
+          >
+            {price}
+          </p>
+        )}
+
+        <ul className="space-y-2 mb-8">
           {features.map((feature, i) => (
             <li key={i} className="flex items-start gap-3 text-stone-dark font-sans text-sm leading-relaxed">
               <CheckCircle2
@@ -83,6 +97,40 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
             </li>
           ))}
         </ul>
+
+        {techniques.length > 0 && (
+          <div className="mb-6" data-testid={`product-techniques-${id}`}>
+            <p className="section-label mb-2">Nocking techniques</p>
+            <div className="flex flex-wrap gap-2">
+              {techniques.map(technique => (
+                <span
+                  key={technique}
+                  className="rounded-full border border-bark-500/40 bg-cream-50 px-3 py-1 font-sans text-xs text-bark-600"
+                >
+                  {technique}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {specs.length > 0 && (
+          <dl
+            data-testid={`product-specs-${id}`}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 border-t border-cream-200 pt-5"
+          >
+            {specs.map(spec => (
+              <div key={spec.label} className="flex flex-col">
+                <dt className="font-sans text-xs uppercase tracking-wide text-bark-500">
+                  {spec.label}
+                </dt>
+                <dd className="font-sans text-sm text-stone-dark leading-snug">
+                  {spec.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        )}
       </div>
     </article>
   );

@@ -37,7 +37,12 @@
       "mcp__github__get_label",
       "Bash(gh label *)",
       "mcp__github__issue_write",
-      "mcp__github__add_issue_comment"
+      "mcp__github__add_issue_comment",
+      "Bash(gh issue *)",
+      "mcp__github__list_issues",
+      "Bash(npx vitest *)",
+      "Bash(node -e \"const m=require\\('gray-matter'\\);const fs=require\\('fs'\\);for\\(const id of ['wings','arc','horizon']\\){const p=m\\(fs.readFileSync\\('content/products/'+id+'.md','utf8'\\)\\);console.log\\(id,'| title:',p.data.title,'| techniques:',JSON.stringify\\(p.data.techniques\\),'| specs#:',\\(p.data.specs||[]\\).length,'| features#:',p.content.split\\('\\\\n'\\).filter\\(l=>/^\\\\s*-\\\\s+/.test\\(l\\)\\).length\\);}\")",
+      "Bash(npx tsc *)"
     ]
   }
 }
