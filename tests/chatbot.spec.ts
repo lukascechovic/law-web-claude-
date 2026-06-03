@@ -24,6 +24,25 @@ test.describe('Chatbot widget', () => {
     );
   });
 
+  test('shows a clear slow-down state when the API rate-limits the request', async ({ page }) => {
+    await page.route('**/api/chat', async route => {
+      await route.fulfill({
+        status: 429,
+        headers: { 'Retry-After': '30', 'Content-Type': 'text/plain; charset=utf-8' },
+        body: 'Too many requests.',
+      });
+    });
+
+    await page.goto('/');
+    await page.locator('[data-testid="chat-launcher"]').click();
+    await page.locator('[data-testid="chat-input"]').fill('What is the ARC?');
+    await page.locator('[data-testid="chat-send"]').click();
+
+    await expect(page.locator('[data-testid="chat-message-assistant"]')).toContainText(
+      'too quickly',
+    );
+  });
+
   test('closes again after opening', async ({ page }) => {
     await page.goto('/');
     await page.locator('[data-testid="chat-launcher"]').click();

@@ -32,6 +32,13 @@ export default function Chatbot() {
         body: JSON.stringify({ messages: history }),
       });
 
+      if (res.status === 429) {
+        appendToLastAssistant(
+          "You're sending messages a little too quickly. Please wait a moment and try again.",
+        );
+        return;
+      }
+
       if (!res.ok || !res.body) {
         appendToLastAssistant('Sorry, something went wrong. Please try again.');
         return;
@@ -130,6 +137,7 @@ export default function Chatbot() {
               data-testid="chat-input"
               value={input}
               onChange={e => setInput(e.target.value)}
+              maxLength={500}
               placeholder="Type your question…"
               aria-label="Chat message"
               className="flex-1 rounded-lg border border-forest-800/20 bg-white px-3 py-2 text-sm outline-none focus:border-forest-600"

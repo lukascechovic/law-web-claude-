@@ -1,13 +1,28 @@
 import { getProducts } from '@/lib/products';
 import { buildGrounding } from '@/lib/grounding';
 import { streamChat, llmConfigFromEnv, type ChatMessage } from '@/lib/llm';
+import {
+  checkRateLimit,
+  upstashStore,
+  rateLimitConfigFromEnv,
+  upstashCredentialsFromEnv,
+} from '@/lib/rateLimit';
 
 // Node runtime, plain fetch + Web streams only — no Vercel-proprietary APIs,
 // so the app stays portable to a VPS/Netlify/Cloudflare (ADR-0001).
 export const runtime = 'nodejs';
 
+// Server-side message cap: bounds prompt size and LLM cost regardless of client.
+const MAX_MESSAGE_CHARS = 500;
+
 function badRequest(message: string): Response {
   return new Response(message, { status: 400 });
+}
+
+/** Best-effort client IP from the proxy hop; host-portable (no Vercel helper). */
+function clientIp(req: Request): string {
+  const forwarded = req.headers.get('x-forwarded-for');
+  return forwarded?.split(',')[0]?.trim() || 'unknown';
 }
 
 function parseTurns(raw: unknown): ChatMessage[] | null {
@@ -35,6 +50,29 @@ export async function POST(req: Request): Promise<Response> {
   const turns = parseTurns((body as { messages?: unknown })?.messages);
   if (!turns) {
     return badRequest('Request must include a non-empty "messages" array.');
+  }
+
+  // Abuse/cost protection: per-IP rate limit before any grounding or LLM work.
+  // Fails open when Upstash is unconfigured (local dev / pre-secrets).
+  const creds = upstashCredentialsFromEnv();
+  if (creds) {
+    const { allowed, retryAfter } = await checkRateLimit(
+      clientIp(req),
+      rateLimitConfigFromEnv(),
+      upstashStore(creds),
+    );
+    if (!allowed) {
+      return new Response('Too many requests. Please slow down and try again shortly.', {
+        status: 429,
+        headers: { 'Retry-After': String(retryAfter) },
+      });
+    }
+  }
+
+  // Cap the visitor's newest message (the last turn) server-side.
+  const latest = turns[turns.length - 1];
+  if (latest.content.length > MAX_MESSAGE_CHARS) {
+    return badRequest(`Message must be ${MAX_MESSAGE_CHARS} characters or fewer.`);
   }
 
   const config = llmConfigFromEnv();
