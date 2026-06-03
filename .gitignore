@@ -8,6 +8,7 @@ out/
 # Build artifacts
 public/images/
 public/videos/
+_old_variants/
 
 # Test artifacts
 test-results/
