@@ -2,11 +2,13 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Products from '@/components/Products';
+import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 import BackgroundComponents from '@/components/ui/background-components';
 import { getAboutContent } from '@/lib/markdown';
 import { getProducts } from '@/lib/products';
+import { getFaq } from '@/lib/faq';
 import { getHeroVideoConfig } from '@/lib/heroVideo';
 
 export default async function Home() {
@@ -24,6 +26,7 @@ export default async function Home() {
           <div className="relative z-10">
             <About content={aboutContent} />
             <Products products={products} />
+            <Faq faq={getFaq()} />
           </div>
         </div>
       </main>
