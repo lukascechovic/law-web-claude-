@@ -33,7 +33,10 @@
       "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" log master..origin/main --oneline)",
       "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" tag v1.0-beta)",
       "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin master:main)",
-      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin v1.0-beta)"
+      "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin v1.0-beta)",
+      "mcp__github__get_label",
+      "Bash(gh label *)",
+      "mcp__github__issue_write"
     ]
   }
 }

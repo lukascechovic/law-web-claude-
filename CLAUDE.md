@@ -82,3 +82,17 @@ Edit `content/texts/background.md` (About section) or `content/texts/products.md
 ### Adding video content
 
 The hero background is `public/videos/hba_filip1.mp4` (sourced from `content/videos/`). YouTube links for future embeds are in `content/videos/youtube links.json`.
+
+## Agent skills
+
+### Issue tracker
+
+Issues are tracked in this repo's GitHub Issues, managed via the `gh` CLI. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default triage vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
