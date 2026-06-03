@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Products from '@/components/Products';
 import Footer from '@/components/Footer';
+import Chatbot from '@/components/Chatbot';
 import BackgroundComponents from '@/components/ui/background-components';
 import { getAboutContent } from '@/lib/markdown';
 import { getProducts } from '@/lib/products';
@@ -27,6 +28,7 @@ export default async function Home() {
         </div>
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 }
