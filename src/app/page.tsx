@@ -5,6 +5,7 @@ import Products from '@/components/Products';
 import Process from '@/components/Process';
 import Gallery from '@/components/Gallery';
 import Reviews from '@/components/Reviews';
+import Faq from '@/components/Faq';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 import BackgroundComponents from '@/components/ui/background-components';
@@ -13,6 +14,7 @@ import { getProducts } from '@/lib/products';
 import { getProcess } from '@/lib/process';
 import { getGallery } from '@/lib/gallery';
 import { getReviews } from '@/lib/reviews';
+import { getFaq } from '@/lib/faq';
 import { getHeroVideoConfig } from '@/lib/heroVideo';
 
 export default async function Home() {
@@ -33,6 +35,7 @@ export default async function Home() {
             <Process process={getProcess()} />
             <Gallery items={getGallery()} />
             <Reviews reviews={getReviews()} />
+            <Faq faq={getFaq()} />
           </div>
         </div>
       </main>
