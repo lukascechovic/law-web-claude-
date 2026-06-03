@@ -36,7 +36,8 @@
       "Bash(git -C \"C:\\\\Users\\\\Lukas\\\\Documents\\\\_projects\\\\claude code WEB\" push origin v1.0-beta)",
       "mcp__github__get_label",
       "Bash(gh label *)",
-      "mcp__github__issue_write"
+      "mcp__github__issue_write",
+      "mcp__github__add_issue_comment"
     ]
   }
 }
