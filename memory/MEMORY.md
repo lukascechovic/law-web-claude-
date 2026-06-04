@@ -1,0 +1,1 @@
+- [Slices are GitHub issues](slices-are-github-issues.md) — "slice #N" = issue #N; gh CLI unauthed, use the GitHub MCP server to read them

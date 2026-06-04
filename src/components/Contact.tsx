@@ -50,11 +50,11 @@ export default function Contact() {
             <li className="flex items-center gap-3">
               <Mail size={18} aria-hidden="true" className="text-bark-500 shrink-0" />
               <a
-                href="mailto:lukas@lukasarcheryworks.com"
+                href="mailto:lukas.archery.works@gmail.com"
                 className="hover:text-cream-50 transition-colors"
                 data-testid="contact-email"
               >
-                lukas@lukasarcheryworks.com
+                lukas.archery.works@gmail.com
               </a>
             </li>
             <li className="flex items-center gap-3">
