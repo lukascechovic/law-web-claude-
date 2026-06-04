@@ -71,6 +71,10 @@ export default function Footer() {
 
       <div className="mx-auto max-w-7xl mt-12 pt-8 border-t border-forest-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream-300">
         <span>Lukas Archery Works — Slovakia</span>
+        <div className="flex gap-4">
+          <a href="/imprint" className="hover:text-cream-50 transition-colors">Imprint</a>
+          <a href="/privacy" className="hover:text-cream-50 transition-colors">Privacy Policy</a>
+        </div>
         <span>© {new Date().getFullYear()} All rights reserved.</span>
       </div>
     </footer>
