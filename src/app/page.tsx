@@ -12,6 +12,7 @@ import Chatbot from '@/components/Chatbot';
 import BackgroundComponents from '@/components/ui/background-components';
 import { getAboutContent } from '@/lib/markdown';
 import { getProducts } from '@/lib/products';
+import { productToJsonLd } from '@/lib/jsonld';
 import { getProcess } from '@/lib/process';
 import { getGallery } from '@/lib/gallery';
 import { getReviews } from '@/lib/reviews';
@@ -24,6 +25,14 @@ export default async function Home() {
   const heroVideo = getHeroVideoConfig();
 
   return (
+    <>
+      {products.map(product => (
+        <script
+          key={product.id}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(productToJsonLd(product)) }}
+        />
+      ))}
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
       <main>
@@ -44,5 +53,6 @@ export default async function Home() {
       <Footer />
       <Chatbot />
     </div>
+    </>
   );
 }

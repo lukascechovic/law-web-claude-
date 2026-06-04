@@ -16,11 +16,29 @@ const inter = Inter({
   display: 'swap',
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://lukasarcheryworks.com';
+
+const DESCRIPTION =
+  'Handcrafted horseback archery equipment from Slovakia. WINGS nocking aids, ARC quivers, and HORIZON quivers — built for performance and personalization.';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Lukas Archery Works',
-  description:
-    'Handcrafted horseback archery equipment from Slovakia. WINGS nocking aids, ARC quivers, and HORIZON quivers — built for performance and personalization.',
+  description: DESCRIPTION,
   keywords: ['horseback archery', 'HBA', 'quiver', 'archery equipment', 'Slovakia'],
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    title: 'Lukas Archery Works',
+    description: DESCRIPTION,
+    images: [{ url: '/images/brand/logo-light.png', width: 1200, height: 630, alt: 'Lukas Archery Works' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lukas Archery Works',
+    description: DESCRIPTION,
+    images: ['/images/brand/logo-light.png'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
