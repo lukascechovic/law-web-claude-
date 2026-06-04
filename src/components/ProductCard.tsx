@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import type { Product } from '@/lib/products';
+import { useInView, revealClasses } from '@/lib/motion';
 
 interface ProductCardProps {
   product: Product;
@@ -13,10 +14,15 @@ interface ProductCardProps {
 export default function ProductCard({ product, reverse = false }: ProductCardProps) {
   const [activeImage, setActiveImage] = useState(0);
   const { id, title, tagline, price, specs, techniques, features, images } = product;
+  const { ref, inView } = useInView<HTMLDivElement>({ repeat: true });
 
   const mainImage = images[activeImage] ?? images[0];
 
   return (
+    <div
+      ref={ref}
+      className={`transition-all duration-700 ${revealClasses(inView)}`}
+    >
     <article
       id={id}
       data-testid={`product-card-${id}`}
@@ -27,13 +33,13 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
       {/* Image gallery */}
       <div className="w-full lg:w-1/2 flex flex-col gap-3">
         {mainImage && (
-          <div className="relative w-full h-[clamp(300px,55vh,600px)] overflow-hidden rounded-lg bg-cream-200">
+          <div className="relative w-full h-[clamp(300px,55vh,600px)] overflow-hidden rounded-lg bg-cream-200 transition-shadow duration-300 hover:shadow-xl">
             <Image
               src={mainImage}
               alt={`${title} — product image ${activeImage + 1}`}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-contain transition-opacity duration-300"
+              className="object-contain transition-[opacity,transform] duration-500 hover:scale-[1.03]"
               priority={activeImage === 0}
             />
           </div>
@@ -133,5 +139,6 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
         )}
       </div>
     </article>
+    </div>
   );
 }

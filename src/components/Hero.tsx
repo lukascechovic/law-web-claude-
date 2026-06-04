@@ -1,4 +1,5 @@
 import VideoPlayer from './VideoPlayer';
+import HeroParallaxLayer from './HeroParallaxLayer';
 
 interface HeroProps {
   videoSrc: string;
@@ -11,17 +12,19 @@ export default function Hero({ videoSrc, videoPosition }: HeroProps) {
       data-testid="hero-section"
       className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-forest-950"
     >
-      {/* Background video */}
-      <VideoPlayer
-        src={videoSrc}
-        autoPlay
-        controls={false}
-        loop
-        className="absolute inset-0 w-full h-full object-cover opacity-60"
-        objectPosition={videoPosition}
-      />
+      {/* Background video with parallax */}
+      <HeroParallaxLayer>
+        <VideoPlayer
+          src={videoSrc}
+          autoPlay
+          controls={false}
+          loop
+          className="absolute inset-0 w-full h-full object-cover opacity-60"
+          objectPosition={videoPosition}
+        />
+      </HeroParallaxLayer>
 
-      {/* Gradient overlay */}
+      {/* Gradient overlay — stays fixed relative to section */}
       <div className="absolute inset-0 bg-gradient-to-b from-forest-950/70 via-forest-950/40 to-forest-950/80" />
 
       {/* Content */}

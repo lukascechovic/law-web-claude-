@@ -131,6 +131,13 @@ test('supported nocking techniques are accurate per product', async ({ page }) =
   await expect(horizon).not.toContainText('Thumb');
 });
 
+// ── Motion system ─────────────────────────────────────────────────────────────
+
+test('hero has parallax layer', async ({ page }) => {
+  await expect(page.locator('[data-testid="hero-parallax"]')).toBeVisible();
+});
+
+
 // ── Footer ────────────────────────────────────────────────────────────────────
 
 test('footer is present', async ({ page }) => {
