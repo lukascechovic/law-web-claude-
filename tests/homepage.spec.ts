@@ -137,6 +137,14 @@ test('hero has parallax layer', async ({ page }) => {
   await expect(page.locator('[data-testid="hero-parallax"]')).toBeVisible();
 });
 
+test('hero parallax layer is pre-scaled so translateY produces visible drift', async ({ page }) => {
+  const parallax = page.locator('[data-testid="hero-parallax"]');
+  const classes = await parallax.getAttribute('class');
+  // Layer must carry a scale > 1 so the video overflows its bounds and
+  // object-cover re-crop no longer absorbs the entire translation.
+  expect(classes).toMatch(/scale-\[1\./);
+});
+
 test('animation toggle button is present in the navbar', async ({ page }) => {
   const nav = page.getByRole('navigation');
   await expect(nav.getByRole('button', { name: /animations/i })).toBeVisible();
