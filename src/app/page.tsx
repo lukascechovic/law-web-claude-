@@ -6,6 +6,7 @@ import Process from '@/components/Process';
 import Gallery from '@/components/Gallery';
 import Reviews from '@/components/Reviews';
 import Faq from '@/components/Faq';
+import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 import BackgroundComponents from '@/components/ui/background-components';
@@ -38,6 +39,7 @@ export default async function Home() {
             <Faq faq={getFaq()} />
           </div>
         </div>
+        <Contact />
       </main>
       <Footer />
       <Chatbot />

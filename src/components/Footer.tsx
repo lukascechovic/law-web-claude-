@@ -3,10 +3,7 @@ import { Instagram, Youtube } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer
-      id="contact"
-      className="bg-forest-950 text-cream-200 py-16 px-6"
-    >
+    <footer className="bg-forest-950 text-cream-200 py-16 px-6">
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand */}
         <div className="flex flex-col gap-4">
