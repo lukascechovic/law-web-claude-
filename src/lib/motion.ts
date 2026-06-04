@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function revealClasses(inView: boolean): string {
-  if (inView) {
+export function revealClasses(inView: boolean, animationsEnabled = true): string {
+  if (!animationsEnabled || inView) {
     return 'opacity-100 translate-y-0';
   }
   return 'opacity-0 translate-y-8';

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { CheckCircle2 } from 'lucide-react';
 import type { Product } from '@/lib/products';
 import { useInView, revealClasses } from '@/lib/motion';
+import { useMotionPreference } from '@/components/MotionProvider';
 
 interface ProductCardProps {
   product: Product;
@@ -14,6 +15,7 @@ interface ProductCardProps {
 export default function ProductCard({ product, reverse = false }: ProductCardProps) {
   const [activeImage, setActiveImage] = useState(0);
   const { id, title, tagline, price, specs, techniques, features, images } = product;
+  const { animationsEnabled } = useMotionPreference();
   const { ref, inView } = useInView<HTMLDivElement>({ repeat: true });
 
   const mainImage = images[activeImage] ?? images[0];
@@ -21,7 +23,7 @@ export default function ProductCard({ product, reverse = false }: ProductCardPro
   return (
     <div
       ref={ref}
-      className={`transition-all duration-700 ${revealClasses(inView)}`}
+      className={`${animationsEnabled ? 'transition-all duration-700' : ''} ${revealClasses(inView, animationsEnabled)}`}
     >
     <article
       id={id}

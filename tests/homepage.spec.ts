@@ -137,6 +137,28 @@ test('hero has parallax layer', async ({ page }) => {
   await expect(page.locator('[data-testid="hero-parallax"]')).toBeVisible();
 });
 
+test('animation toggle button is present in the navbar', async ({ page }) => {
+  const nav = page.getByRole('navigation');
+  await expect(nav.getByRole('button', { name: /animations/i })).toBeVisible();
+});
+
+test('toggling animations off makes reveals skip to visible immediately', async ({ page }) => {
+  const nav = page.getByRole('navigation');
+  const toggle = nav.getByRole('button', { name: /animations/i });
+  await toggle.click();
+  // After disabling, scroll-reveal containers must not carry the hidden class
+  const hidden = page.locator('.opacity-0.translate-y-8');
+  await expect(hidden).toHaveCount(0);
+});
+
+test('animation preference persists across page reload', async ({ page }) => {
+  const nav = page.getByRole('navigation');
+  await nav.getByRole('button', { name: /animations on/i }).click();
+  await page.reload();
+  // Button should reflect the persisted "off" state after reload
+  await expect(nav.getByRole('button', { name: /animations off/i })).toBeVisible();
+});
+
 
 // ── Footer ────────────────────────────────────────────────────────────────────
 

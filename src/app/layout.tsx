@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Playfair_Display, Inter } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import CookieBanner from '@/components/CookieBanner';
+import { MotionProvider } from '@/components/MotionProvider';
 import './globals.css';
 
 const playfair = Playfair_Display({
@@ -45,11 +46,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body>
-        {children}
-        <CookieBanner />
-        {/* Cookieless analytics — loads regardless of consent because it sets
-            no tracking cookies; the banner is informational only. */}
-        <Analytics />
+        <MotionProvider>
+          {children}
+          <CookieBanner />
+          {/* Cookieless analytics — loads regardless of consent because it sets
+              no tracking cookies; the banner is informational only. */}
+          <Analytics />
+        </MotionProvider>
       </body>
     </html>
   );

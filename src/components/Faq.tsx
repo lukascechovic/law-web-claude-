@@ -1,5 +1,6 @@
 import { ChevronDown } from 'lucide-react';
 import type { Faq as FaqData } from '@/lib/faq';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 interface FaqProps {
   faq: FaqData;
@@ -15,11 +16,14 @@ export default function Faq({ faq }: FaqProps) {
       className="py-24 px-6 bg-cream-50/75"
     >
       <div className="mx-auto max-w-3xl">
-        <p className="section-label mb-3">Questions &amp; Answers</p>
-        <h2 className="font-serif text-3xl md:text-4xl text-forest-900 mb-10">
-          {faq.title}
-        </h2>
+        <RevealOnScroll repeat>
+          <p className="section-label mb-3">Questions &amp; Answers</p>
+          <h2 className="font-serif text-3xl md:text-4xl text-forest-900 mb-10">
+            {faq.title}
+          </h2>
+        </RevealOnScroll>
 
+        <RevealOnScroll repeat delay={100}>
         <dl className="space-y-4">
           {faq.items.map((item, index) => (
             <details
@@ -40,6 +44,7 @@ export default function Faq({ faq }: FaqProps) {
             </details>
           ))}
         </dl>
+        </RevealOnScroll>
       </div>
     </section>
   );

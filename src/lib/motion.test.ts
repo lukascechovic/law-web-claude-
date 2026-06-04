@@ -23,4 +23,22 @@ describe('revealClasses', () => {
     expect(classes).not.toContain('opacity-0');
     expect(classes).not.toContain('translate-y-8');
   });
+
+  describe('when animations are disabled', () => {
+    it('treats element as visible regardless of inView=false', () => {
+      const classes = revealClasses(false, false);
+      expect(classes).toContain('opacity-100');
+      expect(classes).not.toContain('opacity-0');
+    });
+
+    it('treats element as visible regardless of inView=true', () => {
+      const classes = revealClasses(true, false);
+      expect(classes).toContain('opacity-100');
+      expect(classes).not.toContain('translate-y-8');
+    });
+
+    it('does not apply translate offset when animations are disabled', () => {
+      expect(revealClasses(false, false)).not.toContain('translate-y-8');
+    });
+  });
 });

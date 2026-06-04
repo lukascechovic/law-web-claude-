@@ -1,9 +1,11 @@
 import Image from 'next/image';
 import { Instagram, Youtube } from 'lucide-react';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 export default function Footer() {
   return (
     <footer className="bg-forest-950 text-cream-200 py-16 px-6">
+      <RevealOnScroll repeat>
       <div className="mx-auto max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Brand */}
         <div className="flex flex-col gap-4">
@@ -65,6 +67,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
+      </RevealOnScroll>
 
       <div className="mx-auto max-w-7xl mt-12 pt-8 border-t border-forest-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-cream-300">
         <span>Lukas Archery Works — Slovakia</span>

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Mail, MapPin, Instagram, Youtube, Send } from 'lucide-react';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 type FormState = 'idle' | 'sending' | 'success' | 'error';
 
@@ -43,7 +44,7 @@ export default function Contact() {
     >
       <div className="mx-auto max-w-5xl grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* Contact info */}
-        <div>
+        <RevealOnScroll repeat>
           <p className="section-label mb-3">Get in Touch</p>
           <h2 className="font-serif text-3xl md:text-4xl text-cream-50 mb-8">Contact</h2>
           <ul className="flex flex-col gap-5 text-cream-200">
@@ -78,10 +79,10 @@ export default function Contact() {
               </a>
             </li>
           </ul>
-        </div>
+        </RevealOnScroll>
 
         {/* Form */}
-        <div>
+        <RevealOnScroll repeat delay={150}>
           {state === 'success' ? (
             <div data-testid="contact-success" className="flex flex-col gap-4">
               <p className="font-serif text-xl text-cream-50">Message sent!</p>
@@ -175,7 +176,7 @@ export default function Contact() {
               </div>
             </form>
           )}
-        </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

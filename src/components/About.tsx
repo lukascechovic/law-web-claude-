@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 interface AboutProps {
   content: {
@@ -25,31 +26,31 @@ export default function About({ content }: AboutProps) {
     >
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Text */}
-        <div>
+        <RevealOnScroll repeat>
           <p className="section-label mb-3">Our Story</p>
           <div
             className="prose prose-cream max-w-none prose-headings:font-serif prose-headings:text-forest-900 prose-p:text-stone-dark prose-p:leading-relaxed"
             dangerouslySetInnerHTML={{ __html: content.htmlContent }}
           />
-        </div>
+        </RevealOnScroll>
 
         {/* Image mosaic */}
-        <div className="grid grid-cols-2 gap-3">
+        <RevealOnScroll repeat delay={200} className="grid grid-cols-2 gap-3">
           {aboutImages.slice(0, 3).map((img, i) => (
             <div
               key={img.src}
-              className={`relative overflow-hidden rounded-lg ${i === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}
+              className={`relative overflow-hidden rounded-lg transition-shadow duration-300 hover:shadow-xl ${i === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}
             >
               <Image
                 src={img.src}
                 alt={img.alt}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-500 hover:scale-105"
+                className="object-cover transition-[opacity,transform] duration-500 hover:scale-[1.03]"
               />
             </div>
           ))}
-        </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

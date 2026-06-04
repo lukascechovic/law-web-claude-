@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { GalleryItem } from '@/lib/gallery';
 import VideoPlayer from './VideoPlayer';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 interface GalleryProps {
   items: GalleryItem[];
@@ -15,7 +16,7 @@ export default function Gallery({ items }: GalleryProps) {
     >
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <RevealOnScroll repeat className="text-center mb-16">
           <p className="section-label mb-3">In Action</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
             The Gear at Full Gallop
@@ -24,15 +25,16 @@ export default function Gallery({ items }: GalleryProps) {
             Riders and their kit on the field — quivers, nocking aids, and
             bows where they belong.
           </p>
-        </div>
+        </RevealOnScroll>
 
         {/* Responsive media grid */}
+        <RevealOnScroll repeat delay={150}>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
           {items.map((item, i) => (
             <div
               key={item.src}
               data-testid={`gallery-item-${i}`}
-              className="relative overflow-hidden rounded-lg aspect-square bg-forest-950/5"
+              className="relative overflow-hidden rounded-lg aspect-square bg-forest-950/5 transition-shadow duration-300 hover:shadow-xl"
             >
               {item.type === 'video' ? (
                 <VideoPlayer
@@ -47,12 +49,13 @@ export default function Gallery({ items }: GalleryProps) {
                   alt={item.alt ?? 'Gear in action — horseback archery'}
                   fill
                   sizes="(max-width: 768px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 hover:scale-105"
+                  className="object-cover transition-[opacity,transform] duration-500 hover:scale-[1.03]"
                 />
               )}
             </div>
           ))}
         </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

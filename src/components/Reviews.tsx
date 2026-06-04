@@ -1,6 +1,7 @@
 import { Quote } from 'lucide-react';
 import type { Review } from '@/lib/reviews';
 import VideoPlayer from './VideoPlayer';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 interface ReviewsProps {
   reviews: Review[];
@@ -53,7 +54,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
     >
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
-        <div className="text-center mb-20">
+        <RevealOnScroll repeat className="text-center mb-20">
           <p className="section-label mb-3">From the Saddle</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
             What Riders Say
@@ -62,13 +63,13 @@ export default function Reviews({ reviews }: ReviewsProps) {
             Real feedback from horseback archers riding with Lukas Archery Works
             gear.
           </p>
-        </div>
+        </RevealOnScroll>
 
         {/* Testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-          {reviews.map(review => (
+          {reviews.map((review, i) => (
+            <RevealOnScroll repeat key={review.id} delay={i * 100}>
             <figure
-              key={review.id}
               data-testid={`review-${review.id}`}
               className="flex flex-col gap-5 rounded-xl bg-cream-100/80 p-8 shadow-sm"
             >
@@ -94,6 +95,7 @@ export default function Reviews({ reviews }: ReviewsProps) {
                 )}
               </figcaption>
             </figure>
+            </RevealOnScroll>
           ))}
         </div>
       </div>
