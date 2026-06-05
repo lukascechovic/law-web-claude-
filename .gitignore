@@ -20,6 +20,9 @@ playwright-report/
 .env.local
 .env.*.local
 
+# Claude Code local config (machine-specific permissions)
+.claude/settings.local.json
+
 # Misc
 .DS_Store
 *.pem
