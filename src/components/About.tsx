@@ -1,23 +1,17 @@
 import Image from 'next/image';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
+const ABOUT_ALT = 'Workshop — Lukas Archery Works';
+
 interface AboutProps {
   content: {
     title: string;
     htmlContent: string;
   };
+  images: string[];
 }
 
-const aboutImages = [
-  { src: '/about/about-01.webp', alt: 'Lukas in action — horseback archery' },
-  { src: '/about/about-02.webp', alt: 'Close-up of archery equipment' },
-  { src: '/about/about-03.webp', alt: 'Horseback archery competition' },
-  { src: '/about/about-04.webp', alt: 'Archer on horseback' },
-  { src: '/about/about-05.webp', alt: 'Archery gear detail' },
-  { src: '/about/about-06.webp', alt: 'Lukas Archery Works workshop' },
-];
-
-export default function About({ content }: AboutProps) {
+export default function About({ content, images }: AboutProps) {
   return (
     <section
       id="about"
@@ -36,14 +30,14 @@ export default function About({ content }: AboutProps) {
 
         {/* Image mosaic */}
         <RevealOnScroll repeat delay={200} className="grid grid-cols-2 gap-3">
-          {aboutImages.slice(0, 3).map((img, i) => (
+          {images.slice(0, 3).map((src, i) => (
             <div
-              key={img.src}
+              key={src}
               className={`relative overflow-hidden rounded-lg transition-shadow duration-300 hover:shadow-xl ${i === 0 ? 'col-span-2 aspect-video' : 'aspect-square'}`}
             >
               <Image
-                src={img.src}
-                alt={img.alt}
+                src={src}
+                alt={ABOUT_ALT}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover transition-[opacity,transform] duration-500 hover:scale-[1.03]"

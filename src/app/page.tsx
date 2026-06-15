@@ -18,9 +18,11 @@ import { getGallery } from '@/lib/gallery';
 import { getReviews } from '@/lib/reviews';
 import { getFaq } from '@/lib/faq';
 import { getHeroVideoConfig } from '@/lib/heroVideo';
+import { getAboutImages } from '@/lib/about';
 
 export default async function Home() {
   const aboutContent = await getAboutContent();
+  const aboutImages = getAboutImages();
   const products = getProducts();
   const heroVideo = getHeroVideoConfig();
 
@@ -40,7 +42,7 @@ export default async function Home() {
         <div className="relative">
           <BackgroundComponents className="absolute inset-0" />
           <div className="relative z-10">
-            <About content={aboutContent} />
+            <About content={aboutContent} images={aboutImages} />
             <Products products={products} />
             <Process process={getProcess()} />
             <Gallery items={getGallery()} />
