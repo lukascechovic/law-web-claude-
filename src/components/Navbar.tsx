@@ -9,6 +9,7 @@ import AnimationToggle from '@/components/AnimationToggle';
 const navLinks = [
   { href: '#about', label: 'About' },
   { href: '#products', label: 'Products' },
+  { href: '#videos', label: 'Videos' },
   { href: '#contact', label: 'Contact' },
 ];
 

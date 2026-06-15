@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Products from '@/components/Products';
 import Process from '@/components/Process';
+import Videos from '@/components/Videos';
 import Gallery from '@/components/Gallery';
 import Reviews from '@/components/Reviews';
 import Faq from '@/components/Faq';
@@ -14,6 +15,7 @@ import { getAboutContent } from '@/lib/markdown';
 import { getProducts } from '@/lib/products';
 import { productToJsonLd } from '@/lib/jsonld';
 import { getProcess } from '@/lib/process';
+import { getVideos } from '@/lib/videos';
 import { getGallery } from '@/lib/gallery';
 import { getReviews } from '@/lib/reviews';
 import { getFaq } from '@/lib/faq';
@@ -45,6 +47,7 @@ export default async function Home() {
             <About content={aboutContent} images={aboutImages} />
             <Products products={products} />
             <Process process={getProcess()} />
+            <Videos videos={getVideos()} />
             <Gallery items={getGallery()} />
             <Reviews reviews={getReviews()} />
             <Faq faq={getFaq()} />
