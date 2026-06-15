@@ -88,12 +88,12 @@ export function checkContent(rootDir: string): ContentReport {
     const errors = validateProduct(id, raw);
 
     // check image gallery
-    const imageDir = path.join(rootDir, 'images', id);
+    const imageDir = path.join(rootDir, 'products', id);
     const imageCount = countImages(imageDir);
     if (imageCount === -1) {
-      errors.push(`no image folder found at images/${id}/`);
+      errors.push(`no image folder found at products/${id}/`);
     } else if (imageCount === 0) {
-      errors.push(`image folder images/${id}/ exists but contains no images`);
+      errors.push(`image folder products/${id}/ exists but contains no images`);
     }
 
     if (errors.length > 0) issues.push({ file: `products/${file}`, errors });

@@ -9,8 +9,8 @@ let imagesDir: string;
 
 beforeEach(() => {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'law-process-'));
-  contentDir = path.join(base, 'texts');
-  imagesDir = path.join(base, 'images');
+  contentDir = path.join(base, 'process');
+  imagesDir = base;
   fs.mkdirSync(contentDir, { recursive: true });
   fs.mkdirSync(imagesDir, { recursive: true });
 });
@@ -83,7 +83,7 @@ describe('step images', () => {
     );
 
     const result = getProcess({ contentDir, imagesDir });
-    expect(result.steps[0].image).toBe('/images/process/process-01.webp');
+    expect(result.steps[0].image).toBe('/process/process-01.webp');
   });
 
   it('leaves image undefined for a step with no image reference', () => {

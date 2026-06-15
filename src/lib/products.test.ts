@@ -10,7 +10,7 @@ let imagesDir: string;
 beforeEach(() => {
   const base = fs.mkdtempSync(path.join(os.tmpdir(), 'law-products-'));
   contentDir = path.join(base, 'products');
-  imagesDir = path.join(base, 'images');
+  imagesDir = path.join(base, 'products');
   fs.mkdirSync(contentDir, { recursive: true });
   fs.mkdirSync(imagesDir, { recursive: true });
 });
@@ -141,9 +141,9 @@ describe('images', () => {
     writeImages('wings', ['wings-02.webp', 'wings-01.webp', 'wings-03.webp']);
 
     expect(getProduct('wings', { contentDir, imagesDir })!.images).toEqual([
-      '/images/wings/wings-01.webp',
-      '/images/wings/wings-02.webp',
-      '/images/wings/wings-03.webp',
+      '/products/wings/wings-01.webp',
+      '/products/wings/wings-02.webp',
+      '/products/wings/wings-03.webp',
     ]);
   });
 
@@ -152,7 +152,7 @@ describe('images', () => {
     writeImages('arc', ['arc-01.webp', 'README.md', 'notes.txt']);
 
     const arc = getProduct('arc', { contentDir, imagesDir });
-    expect(arc!.images).toEqual(['/images/arc/arc-01.webp']);
+    expect(arc!.images).toEqual(['/products/arc/arc-01.webp']);
 
     // horizon has a file but no image folder — must not throw, just empty.
     writeProduct('horizon', '---\ntitle: HORIZON\n---\n- feature');

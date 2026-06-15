@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: 'Lukas Archery Works',
     description: DESCRIPTION,
-    images: [{ url: '/images/brand/logo-light.png', width: 1200, height: 630, alt: 'Lukas Archery Works' }],
+    images: [{ url: '/brand/logo-light.png', width: 1200, height: 630, alt: 'Lukas Archery Works' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Lukas Archery Works',
     description: DESCRIPTION,
-    images: ['/images/brand/logo-light.png'],
+    images: ['/brand/logo-light.png'],
   },
 };
 

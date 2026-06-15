@@ -26,7 +26,7 @@ export interface CatalogOptions {
 }
 
 const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'products');
-const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
+const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public', 'products');
 
 function parseSpecs(raw: unknown): ProductSpec[] {
   if (!Array.isArray(raw)) return [];
@@ -59,7 +59,7 @@ function collectImages(id: string, imagesDir: string): string[] {
   return files
     .filter(file => IMAGE_EXTENSIONS.test(file))
     .sort()
-    .map(file => `/images/${id}/${file}`);
+    .map(file => `/products/${id}/${file}`);
 }
 
 function parseFeatures(body: string): string[] {

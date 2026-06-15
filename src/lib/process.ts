@@ -20,8 +20,8 @@ export interface ProcessOptions {
   imagesDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'texts');
-const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'process');
+const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public');
 
 const IMAGES_SUBDIR = 'process';
 
@@ -37,7 +37,7 @@ function resolveImage(filename: string, imagesDir: string): string | undefined {
   } catch {
     return undefined;
   }
-  return `/images/${IMAGES_SUBDIR}/${name}`;
+  return `/${IMAGES_SUBDIR}/${name}`;
 }
 
 function parseSteps(raw: unknown, imagesDir: string): ProcessStep[] {

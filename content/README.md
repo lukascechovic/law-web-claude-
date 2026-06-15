@@ -1,6 +1,6 @@
 # Content Guide
 
-Everything the site displays comes from files in this directory. No code changes are needed to update text, images, or products — edit the files here and run `npm run dev`.
+**Rule: folder name = section name on the page.** Every top-level folder here maps 1-to-1 to a page section. No code changes are needed to update text, images, or products — edit the files and run `npm run dev`.
 
 After adding or replacing any files, run the content audit to check for errors:
 
@@ -10,21 +10,46 @@ npm run check-content
 
 ---
 
-## Products (`content/products/`)
+## `hero/` — Hero section
 
-Each product is one Markdown file. The filename becomes the product ID (e.g. `wings.md` → `/products/wings`).
+| File | Purpose |
+|---|---|
+| `video.json` | Controls which video plays and its `objectPosition` CSS value |
+| `hba_filip*.mp4` | Hero background video files |
+
+`video.json` format:
+```json
+{ "src": "/hero/hba_filip1.mp4", "objectPosition": "50% 28%" }
+```
+
+---
+
+## `about/` — About section
+
+| File | Purpose |
+|---|---|
+| `background.md` | Body copy rendered as HTML prose |
+| `about-01.webp` … | Section images, displayed automatically in alphabetical order |
+
+`background.md` is plain Markdown. The `## Background` heading is stripped; the body renders inside a Tailwind `prose` block.
+
+---
+
+## `products/` — Products section
+
+Each product is one Markdown file. The filename becomes the product ID (e.g. `wings.md` → product `wings`). Product images live in a subfolder with the same name (e.g. `wings/`).
 
 **Required frontmatter fields:**
 
 ```yaml
 ---
-title: WINGS — Arrow Nocking Aid          # shown as the product heading
-tagline: A short one-liner description    # shown below the title
-price: Price on request                   # or e.g. "From €19"
-techniques:                               # nocking techniques supported
+title: WINGS — Arrow Nocking Aid
+tagline: A short one-liner description
+price: Price on request
+techniques:
   - Slavic
   - Thumb
-specs:                                    # ordered list of spec rows
+specs:
   - label: Material
     value: Renewable bioplastic
 ---
@@ -33,38 +58,36 @@ specs:                                    # ordered list of spec rows
 - Second feature bullet
 ```
 
-**Images:** Place WebP files in `content/images/{id}/` named `{id}-01.webp`, `{id}-02.webp`, etc. They appear in the gallery automatically — sorted alphabetically, no code change needed.
+**Images:** Place WebP files in `content/products/{id}/` named `{id}-01.webp`, `{id}-02.webp`, etc. They appear in the gallery automatically — sorted alphabetically, no code change needed.
 
-**To add a new product:** create `content/products/{id}.md` and `content/images/{id}/`. Done.
+**To add a new product:** create `content/products/{id}.md` and `content/products/{id}/`. Done.
 
 ---
 
-## Reviews (`content/reviews/`)
+## `process/` — Process section
 
-Each review is one Markdown file (e.g. `01-maria.md`). Filename prefix controls display order.
+| File | Purpose |
+|---|---|
+| `process.md` | Step definitions (YAML frontmatter only) |
+| `process-01.webp` … | Step images, referenced by filename in frontmatter |
 
-**Required frontmatter fields:**
+`process.md` format:
 
 ```yaml
 ---
-author: Maria Kovac
-role: Competitive horseback archer, Slovakia
+title: How It Is Made
+steps:
+  - title: Design & CAD
+    description: Full description of the step.
+    image: process-01.webp
 ---
-
-The review text goes here as plain paragraph(s).
 ```
 
 ---
 
-## About section (`content/texts/background.md`)
+## `faq/` — FAQ section
 
-Plain Markdown. The `## Background` heading is stripped; the body is rendered as HTML inside a Tailwind `prose` block. Edit freely.
-
----
-
-## FAQ (`content/texts/faq.md`)
-
-Markdown with a YAML frontmatter title. Each `## Question` heading followed by a paragraph becomes one FAQ item.
+`faq/faq.md` — Markdown with a YAML frontmatter title. Each `## Question` heading followed by a paragraph becomes one FAQ item.
 
 ```yaml
 ---
@@ -78,45 +101,52 @@ Answer paragraph here.
 
 ---
 
-## Process steps (`content/texts/process.md`)
+## `gallery/` — Gallery section
 
-YAML frontmatter only — the body is unused. Each step needs `title`, `description`, and `image` (filename relative to `content/images/process/`).
-
-```yaml
----
-title: How It Is Made
-steps:
-  - title: Design & CAD
-    description: >-
-      Full description of the step.
-    image: process-01.webp
----
-```
+Place WebP files named `gallery-01.webp`, `gallery-02.webp`, etc. They are sorted alphabetically and displayed automatically.
 
 ---
 
-## Brand assets (`content/images/brand/`)
+## `brand/` — Brand assets
 
 | File | Purpose |
 |---|---|
 | `logo-dark.png` | Logo on light backgrounds |
-| `logo-light.png` | Logo on dark backgrounds |
+| `logo-light.png` | Logo on dark backgrounds (navbar, footer) |
 | `logo-vector.svg` | Vector logo |
 | `favicon.svg` | Browser tab icon |
 
 ---
 
-## Videos (`content/videos/`)
+## `reviews/` — Reviews section
 
-Hero background video: `hba_filip1.mp4`. Replace this file to change the hero video.
+Each review is one Markdown file (e.g. `01-maria.md`). Filename prefix controls display order.
 
-YouTube embed links for future use are stored in `content/videos/youtube links.json`.
+```yaml
+---
+author: Maria Kovac
+role: Competitive horseback archer, Slovakia
+---
+
+The review text goes here as plain paragraph(s).
+```
 
 ---
 
-## Gallery (`content/images/gallery/`)
+## `videos/` — YouTube links
 
-Place WebP files named `gallery-01.webp`, `gallery-02.webp`, etc. Sorted alphabetically.
+`youtube-links.json` — flat array of YouTube video entries for the videos section:
+
+```json
+[
+  {
+    "title": "Video title",
+    "description": "Short description",
+    "embed_url": "https://www.youtube.com/watch?v=...",
+    "thumbnail": "placeholder"
+  }
+]
+```
 
 ---
 

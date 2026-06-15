@@ -7,12 +7,12 @@ export interface HeroVideoConfig {
 }
 
 const DEFAULT_HERO_VIDEO_CONFIG: HeroVideoConfig = {
-  src: '/videos/hba_filip1.mp4',
+  src: '/hero/hba_filip1.mp4',
   objectPosition: '50% 28%',
 };
 
 export function getHeroVideoConfig(): HeroVideoConfig {
-  const configPath = path.join(process.cwd(), 'content/videos/hero-video.json');
+  const configPath = path.join(process.cwd(), 'content/hero/video.json');
 
   try {
     const fileContents = fs.readFileSync(configPath, 'utf8');

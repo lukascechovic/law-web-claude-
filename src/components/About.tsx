@@ -9,12 +9,12 @@ interface AboutProps {
 }
 
 const aboutImages = [
-  { src: '/images/about/about-01.webp', alt: 'Lukas in action — horseback archery' },
-  { src: '/images/about/about-02.webp', alt: 'Close-up of archery equipment' },
-  { src: '/images/about/about-03.webp', alt: 'Horseback archery competition' },
-  { src: '/images/about/about-04.webp', alt: 'Archer on horseback' },
-  { src: '/images/about/about-05.webp', alt: 'Archery gear detail' },
-  { src: '/images/about/about-06.webp', alt: 'Lukas Archery Works workshop' },
+  { src: '/about/about-01.webp', alt: 'Lukas in action — horseback archery' },
+  { src: '/about/about-02.webp', alt: 'Close-up of archery equipment' },
+  { src: '/about/about-03.webp', alt: 'Horseback archery competition' },
+  { src: '/about/about-04.webp', alt: 'Archer on horseback' },
+  { src: '/about/about-05.webp', alt: 'Archery gear detail' },
+  { src: '/about/about-06.webp', alt: 'Lukas Archery Works workshop' },
 ];
 
 export default function About({ content }: AboutProps) {

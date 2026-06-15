@@ -10,7 +10,7 @@ export default function Footer() {
         {/* Brand */}
         <div className="flex flex-col gap-4">
           <Image
-            src="/images/brand/logo-light.png"
+            src="/brand/logo-light.png"
             alt="Lukas Archery Works logo"
             width={140}
             height={48}

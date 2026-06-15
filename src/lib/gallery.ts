@@ -12,7 +12,7 @@ export interface GalleryOptions {
   imagesDir?: string;
 }
 
-const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
+const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public');
 
 const GALLERY_ALT = 'Gear in action — horseback archery';
 
@@ -22,7 +22,7 @@ const VIDEO_EXTENSIONS = /\.(mp4|webm|mov)$/i;
 function buildItem(file: string): GalleryItem {
   return {
     type: VIDEO_EXTENSIONS.test(file) ? 'video' : 'image',
-    src: `/images/gallery/${file}`,
+    src: `/gallery/${file}`,
     alt: GALLERY_ALT,
   };
 }

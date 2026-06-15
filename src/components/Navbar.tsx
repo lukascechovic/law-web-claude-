@@ -34,7 +34,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
           <Image
-            src="/images/brand/logo-light.png"
+            src="/brand/logo-light.png"
             alt="Lukas Archery Works logo"
             width={240}
             height={40}

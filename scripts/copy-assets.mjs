@@ -8,22 +8,29 @@ const root = join(__dirname, '..');
 
 const IMAGE_EXTENSIONS = new Set(['.webp', '.jpg', '.jpeg', '.png']);
 
-// Discover every image folder under content/images/ dynamically, so adding a new
-// product (or section) is a content edit — drop a folder, no code change here.
-// This mirrors the dynamic product discovery in src/lib/products.ts (ADR-0003).
-const imageSourceRoot = 'content/images';
-const imageCopies = existsSync(join(root, imageSourceRoot))
-  ? readdirSync(join(root, imageSourceRoot), { withFileTypes: true })
+// Discover product image subfolders dynamically so adding a new product is a
+// content edit — drop a folder under content/products/, no code change here.
+// Mirrors the dynamic product discovery in src/lib/products.ts (ADR-0003).
+const productsSourceRoot = 'content/products';
+const productImageCopies = existsSync(join(root, productsSourceRoot))
+  ? readdirSync(join(root, productsSourceRoot), { withFileTypes: true })
       .filter(entry => entry.isDirectory())
       .map(entry => [
-        `${imageSourceRoot}/${entry.name}`,
-        `public/images/${entry.name}`,
+        `${productsSourceRoot}/${entry.name}`,
+        `public/products/${entry.name}`,
       ])
   : [];
 
+const imageCopies = [
+  ['content/about',   'public/about'],
+  ['content/gallery', 'public/gallery'],
+  ['content/process', 'public/process'],
+  ...productImageCopies,
+];
+
 const binaryCopies = [
-  ['content/videos',         'public/videos'],
-  ['content/promo',          'public/promo'],
+  ['content/hero',   'public/hero'],
+  ['content/brand',  'public/brand'],
 ];
 
 async function copyImagesWithNormalizedOrientation(srcPath, destPath) {

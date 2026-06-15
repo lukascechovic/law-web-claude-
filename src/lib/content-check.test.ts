@@ -118,7 +118,7 @@ describe('checkContent', () => {
       'products/wings.md',
       '---\ntitle: WINGS\ntagline: Aid\nprice: €10\n---\n- feature',
     );
-    makeImageDir('images/wings', ['wings-01.webp']);
+    makeImageDir('products/wings', ['wings-01.webp']);
     writeFile('reviews/01-maria.md', '---\nauthor: Maria\nrole: Archer\n---\nGreat product.');
 
     const report: ContentReport = checkContent(tmpDir);
@@ -143,7 +143,7 @@ describe('checkContent', () => {
       'products/wings.md',
       '---\ntitle: WINGS\ntagline: Aid\nprice: €10\n---\n- feature',
     );
-    makeImageDir('images/wings', []); // folder exists but empty
+    makeImageDir('products/wings', []); // folder exists but empty
 
     const report = checkContent(tmpDir);
 

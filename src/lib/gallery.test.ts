@@ -9,7 +9,7 @@ let imagesDir: string;
 
 beforeEach(() => {
   base = fs.mkdtempSync(path.join(os.tmpdir(), 'law-gallery-'));
-  imagesDir = path.join(base, 'images');
+  imagesDir = base;
   fs.mkdirSync(imagesDir, { recursive: true });
 });
 
@@ -28,9 +28,9 @@ describe('getGallery', () => {
     writeGalleryImages(['gallery-02.webp', 'gallery-01.webp', 'gallery-03.webp']);
 
     expect(getGallery({ imagesDir })).toEqual([
-      { type: 'image', src: '/images/gallery/gallery-01.webp', alt: 'Gear in action — horseback archery' },
-      { type: 'image', src: '/images/gallery/gallery-02.webp', alt: 'Gear in action — horseback archery' },
-      { type: 'image', src: '/images/gallery/gallery-03.webp', alt: 'Gear in action — horseback archery' },
+      { type: 'image', src: '/gallery/gallery-01.webp', alt: 'Gear in action — horseback archery' },
+      { type: 'image', src: '/gallery/gallery-02.webp', alt: 'Gear in action — horseback archery' },
+      { type: 'image', src: '/gallery/gallery-03.webp', alt: 'Gear in action — horseback archery' },
     ]);
   });
 
@@ -38,8 +38,8 @@ describe('getGallery', () => {
     writeGalleryImages(['gallery-01.webp', 'clip.mp4', 'README.md', 'notes.txt']);
 
     expect(getGallery({ imagesDir })).toEqual([
-      { type: 'video', src: '/images/gallery/clip.mp4', alt: 'Gear in action — horseback archery' },
-      { type: 'image', src: '/images/gallery/gallery-01.webp', alt: 'Gear in action — horseback archery' },
+      { type: 'video', src: '/gallery/clip.mp4', alt: 'Gear in action — horseback archery' },
+      { type: 'image', src: '/gallery/gallery-01.webp', alt: 'Gear in action — horseback archery' },
     ]);
   });
 
