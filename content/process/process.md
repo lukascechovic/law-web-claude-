@@ -1,4 +1,5 @@
 ---
+label: The Craft
 title: How It Is Made
 steps:
   - title: Design & CAD

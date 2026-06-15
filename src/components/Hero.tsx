@@ -1,12 +1,13 @@
 import VideoPlayer from './VideoPlayer';
 import HeroParallaxLayer from './HeroParallaxLayer';
+import type { HeroContent } from '@/lib/heroContent';
 
-interface HeroProps {
+interface HeroProps extends HeroContent {
   videoSrc: string;
   videoPosition: string;
 }
 
-export default function Hero({ videoSrc, videoPosition }: HeroProps) {
+export default function Hero({ videoSrc, videoPosition, label, heading, subheading, cta }: HeroProps) {
   return (
     <section
       data-testid="hero-section"
@@ -29,18 +30,15 @@ export default function Hero({ videoSrc, videoPosition }: HeroProps) {
 
       {/* Content */}
       <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        <p className="section-label text-bark-500 mb-4">Horseback Archery Equipment</p>
+        <p className="section-label text-bark-500 mb-4">{label}</p>
         <h1 className="font-serif text-5xl md:text-7xl text-cream-50 leading-tight mb-6">
-          Lukas&nbsp;Archery
-          <br />
-          <span className="text-bark-500">Works</span>
+          {heading}
         </h1>
         <p className="font-sans text-cream-200 text-lg md:text-xl leading-relaxed mb-10 max-w-xl mx-auto">
-          Precision-crafted gear for horseback archery and speed shooting —
-          built in Slovakia for riders who demand more.
+          {subheading}
         </p>
         <a href="#products" className="btn-primary">
-          View Products
+          {cta}
         </a>
       </div>
 

@@ -54,6 +54,16 @@ describe('getProcess', () => {
     expect(result.steps[0].description).toBe('Each part starts as a digital model.');
   });
 
+  it('reads label from frontmatter', () => {
+    writeProcess('---\ntitle: How It Is Made\nlabel: The Craft\nsteps: []\n---\n');
+    expect(getProcess({ contentDir, imagesDir }).label).toBe('The Craft');
+  });
+
+  it('defaults label to "The Craft" when absent from frontmatter', () => {
+    writeProcess('---\ntitle: How It Is Made\nsteps: []\n---\n');
+    expect(getProcess({ contentDir, imagesDir }).label).toBe('The Craft');
+  });
+
   it('tolerates a missing process file, returning empty steps', () => {
     const result = getProcess({ contentDir, imagesDir });
     expect(result.title).toBe('');

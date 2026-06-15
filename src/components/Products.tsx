@@ -1,12 +1,14 @@
 import type { Product } from '@/lib/products';
+import type { ProductsSection } from '@/lib/productsSection';
 import ProductCard from './ProductCard';
 import RevealOnScroll from './RevealOnScroll';
 
 interface ProductsProps {
   products: Product[];
+  section: ProductsSection;
 }
 
-export default function Products({ products }: ProductsProps) {
+export default function Products({ products, section }: ProductsProps) {
   return (
     <section
       id="products"
@@ -16,13 +18,12 @@ export default function Products({ products }: ProductsProps) {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <RevealOnScroll className="text-center mb-20" repeat>
-          <p className="section-label mb-3">The Collection</p>
+          <p className="section-label mb-3">{section.label}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
-            Gear Built for Riders
+            {section.heading}
           </h2>
           <p className="mt-4 font-sans text-stone-mid max-w-xl mx-auto text-base leading-relaxed">
-            Each piece is engineered for horseback archery — functional,
-            personal, and ready to perform.
+            {section.subheading}
           </p>
         </RevealOnScroll>
 

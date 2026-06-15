@@ -1,11 +1,7 @@
-import type { Video } from '@/lib/videos';
+import type { VideosResult } from '@/lib/videos';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
-interface VideosProps {
-  videos: Video[];
-}
-
-export default function Videos({ videos }: VideosProps) {
+export default function Videos({ label, heading, videos }: VideosResult) {
   if (videos.length === 0) return null;
 
   return (
@@ -16,9 +12,9 @@ export default function Videos({ videos }: VideosProps) {
     >
       <div className="mx-auto max-w-7xl">
         <RevealOnScroll repeat className="text-center mb-20">
-          <p className="section-label mb-3">In Action</p>
+          <p className="section-label mb-3">{label}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
-            See It Ride
+            {heading}
           </h2>
         </RevealOnScroll>
 

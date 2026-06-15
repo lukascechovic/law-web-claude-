@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { getAboutImages } from './about';
+import { getAboutContent } from './markdown';
 
 let base: string;
 let imagesDir: string;
@@ -21,6 +22,20 @@ function writeAboutImages(files: string[]) {
   fs.mkdirSync(dir, { recursive: true });
   for (const file of files) fs.writeFileSync(path.join(dir, file), '');
 }
+
+describe('getAboutContent', () => {
+  it('reads label from frontmatter', async () => {
+    fs.writeFileSync(path.join(base, 'background.md'), '---\nlabel: Our Story\n---\nBody text.', 'utf8');
+    const result = await getAboutContent({ contentDir: base });
+    expect(result.label).toBe('Our Story');
+  });
+
+  it('defaults label to "Our Story" when not in frontmatter', async () => {
+    fs.writeFileSync(path.join(base, 'background.md'), '---\ntitle: About\n---\nBody.', 'utf8');
+    const result = await getAboutContent({ contentDir: base });
+    expect(result.label).toBe('Our Story');
+  });
+});
 
 describe('getAboutImages', () => {
   it('returns sorted /about/ URLs for webp files in the about folder', () => {

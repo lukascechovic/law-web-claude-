@@ -1,22 +1,26 @@
-[
-  {
-    "title": "WINGS in Action",
-    "description": "See the WINGS arrow nocking aid in use during a horseback archery session.",
-    "url": "https://www.youtube.com/watch?v=nZQ_zJp8wAY"
-  },
-  {
-    "title": "ARC Quiver Review",
-    "description": "Detailed review of the ARC Sideback Quiver by a professional horseback archer.",
-    "url": "https://www.youtube.com/watch?v=TIoF_qppVlk"
-  },
-  {
-    "title": "HORIZON Quiver Test",
-    "description": "Testing the HORIZON quiver in real-world horseback archery conditions.",
-    "url": "https://www.youtube.com/watch?v=-dIZLvCnyx8&t=410s"
-  },
-  {
-    "title": "Full Product Comparison",
-    "description": "Compare all three LAW products side by side.",
-    "url": "https://www.youtube.com/watch?v=osvZ87dL-9E"
-  }
-]
+{
+  "label": "In Action",
+  "heading": "See It Ride",
+  "items": [
+    {
+      "title": "WINGS in Action",
+      "description": "See the WINGS arrow nocking aid in use during a horseback archery session.",
+      "url": "https://www.youtube.com/watch?v=nZQ_zJp8wAY"
+    },
+    {
+      "title": "ARC Quiver Review",
+      "description": "Detailed review of the ARC Sideback Quiver by a professional horseback archer.",
+      "url": "https://www.youtube.com/watch?v=TIoF_qppVlk"
+    },
+    {
+      "title": "HORIZON Quiver Test",
+      "description": "Testing the HORIZON quiver in real-world horseback archery conditions.",
+      "url": "https://www.youtube.com/watch?v=-dIZLvCnyx8&t=410s"
+    },
+    {
+      "title": "Full Product Comparison",
+      "description": "Compare all three LAW products side by side.",
+      "url": "https://www.youtube.com/watch?v=osvZ87dL-9E"
+    }
+  ]
+}

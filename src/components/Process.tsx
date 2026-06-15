@@ -18,7 +18,7 @@ export default function Process({ process }: ProcessProps) {
     >
       <div className="mx-auto max-w-7xl">
         <RevealOnScroll repeat className="max-w-2xl mb-16">
-          <p className="section-label mb-3">The Craft</p>
+          <p className="section-label mb-3">{process.label}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900">
             {process.title || 'How It Is Made'}
           </h2>

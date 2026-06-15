@@ -5,6 +5,7 @@ const ABOUT_ALT = 'Workshop — Lukas Archery Works';
 
 interface AboutProps {
   content: {
+    label: string;
     title: string;
     htmlContent: string;
   };
@@ -21,7 +22,7 @@ export default function About({ content, images }: AboutProps) {
       <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Text */}
         <RevealOnScroll repeat>
-          <p className="section-label mb-3">Our Story</p>
+          <p className="section-label mb-3">{content.label}</p>
           <div
             className="prose prose-cream max-w-none prose-headings:font-serif prose-headings:text-forest-900 prose-p:text-stone-dark prose-p:leading-relaxed"
             dangerouslySetInnerHTML={{ __html: content.htmlContent }}

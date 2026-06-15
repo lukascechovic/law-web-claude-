@@ -21,12 +21,16 @@ import { getReviews } from '@/lib/reviews';
 import { getFaq } from '@/lib/faq';
 import { getHeroVideoConfig } from '@/lib/heroVideo';
 import { getAboutImages } from '@/lib/about';
+import { getHeroContent } from '@/lib/heroContent';
+import { getProductsSection } from '@/lib/productsSection';
 
 export default async function Home() {
   const aboutContent = await getAboutContent();
   const aboutImages = getAboutImages();
   const products = getProducts();
   const heroVideo = getHeroVideoConfig();
+  const heroContent = getHeroContent();
+  const productsSection = getProductsSection();
 
   return (
     <>
@@ -40,14 +44,14 @@ export default async function Home() {
     <div className="min-h-screen bg-[#fafafa]">
       <Navbar />
       <main>
-        <Hero videoSrc={heroVideo.src} videoPosition={heroVideo.objectPosition} />
+        <Hero videoSrc={heroVideo.src} videoPosition={heroVideo.objectPosition} {...heroContent} />
         <div className="relative">
           <BackgroundComponents className="absolute inset-0" />
           <div className="relative z-10">
             <About content={aboutContent} images={aboutImages} />
-            <Products products={products} />
+            <Products products={products} section={productsSection} />
             <Process process={getProcess()} />
-            <Videos videos={getVideos()} />
+            <Videos {...getVideos()} />
             <Gallery items={getGallery()} />
             <Reviews reviews={getReviews()} />
             <Faq faq={getFaq()} />

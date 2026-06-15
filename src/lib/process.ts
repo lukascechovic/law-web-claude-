@@ -9,6 +9,7 @@ export interface ProcessStep {
 }
 
 export interface Process {
+  label: string;
   title: string;
   steps: ProcessStep[];
 }
@@ -69,12 +70,14 @@ export function getProcess(opts: ProcessOptions = {}): Process {
     data = matter(raw).data;
   } catch {
     // Missing file or malformed frontmatter — render nothing rather than crash.
-    return { title: '', steps: [] };
+    return { label: 'The Craft', title: '', steps: [] };
   }
 
+  const label = typeof data.label === 'string' && data.label.trim() ? data.label.trim() : 'The Craft';
   const title = typeof data.title === 'string' ? data.title.trim() : '';
 
   return {
+    label,
     title,
     steps: parseSteps(data.steps, imagesDir),
   };
