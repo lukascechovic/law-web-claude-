@@ -12,7 +12,7 @@ const DEFAULT_HERO_VIDEO_CONFIG: HeroVideoConfig = {
 };
 
 export function getHeroVideoConfig(): HeroVideoConfig {
-  const configPath = path.join(process.cwd(), 'content/hero/video.json');
+  const configPath = path.join(process.cwd(), 'content/01-hero/video.json');
 
   try {
     const fileContents = fs.readFileSync(configPath, 'utf8');

@@ -12,7 +12,7 @@ export interface HeroContentOptions {
   contentDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'hero');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '01-hero');
 
 const DEFAULTS: HeroContent = {
   label: 'Horseback Archery Equipment',

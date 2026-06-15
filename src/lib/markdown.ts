@@ -11,7 +11,7 @@ export interface AboutContentOptions {
 export async function getAboutContent(
   opts: AboutContentOptions = {},
 ): Promise<{ label: string; title: string; htmlContent: string }> {
-  const contentDir = opts.contentDir ?? path.join(process.cwd(), 'content/about');
+  const contentDir = opts.contentDir ?? path.join(process.cwd(), 'content/02-about');
   const filePath = path.join(contentDir, 'background.md');
   const fileContents = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContents);

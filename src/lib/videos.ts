@@ -17,7 +17,7 @@ export interface VideosOptions {
   contentDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'videos');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '05-videos');
 const DEFAULT_LABEL = 'In Action';
 const DEFAULT_HEADING = 'See It Ride';
 

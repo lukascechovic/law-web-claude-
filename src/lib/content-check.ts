@@ -74,7 +74,7 @@ export function checkContent(rootDir: string): ContentReport {
   const issues: ContentIssue[] = [];
 
   // ── products ──────────────────────────────────────────────────────────────
-  const productsDir = path.join(rootDir, 'products');
+  const productsDir = path.join(rootDir, '03-products');
   let productFiles: string[] = [];
   try {
     productFiles = fs.readdirSync(productsDir).filter(f => f.endsWith('.md'));
@@ -88,7 +88,7 @@ export function checkContent(rootDir: string): ContentReport {
     const errors = validateProduct(id, raw);
 
     // check image gallery
-    const imageDir = path.join(rootDir, 'products', id);
+    const imageDir = path.join(rootDir, '03-products', id);
     const imageCount = countImages(imageDir);
     if (imageCount === -1) {
       errors.push(`no image folder found at products/${id}/`);
@@ -100,7 +100,7 @@ export function checkContent(rootDir: string): ContentReport {
   }
 
   // ── reviews ───────────────────────────────────────────────────────────────
-  const reviewsDir = path.join(rootDir, 'reviews');
+  const reviewsDir = path.join(rootDir, '07-reviews');
   let reviewFiles: string[] = [];
   try {
     reviewFiles = fs.readdirSync(reviewsDir).filter(f => f.endsWith('.md'));

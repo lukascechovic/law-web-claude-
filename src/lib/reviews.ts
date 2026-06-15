@@ -10,29 +10,70 @@ export interface Review {
   video?: string;
 }
 
+export interface ReviewsSection {
+  label: string;
+  heading: string;
+  subheading: string;
+  reviews: Review[];
+}
+
 export interface ReviewsOptions {
-  /** Directory holding per-testimonial Markdown files. */
+  /** Directory holding per-testimonial Markdown files and `section.json`. */
   contentDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'reviews');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '07-reviews');
 
-export function getReviews(opts: ReviewsOptions = {}): Review[] {
+const DEFAULTS = {
+  label: 'From the Saddle',
+  heading: 'What Riders Say',
+  subheading: 'Real feedback from horseback archers riding with Lukas Archery Works gear.',
+};
+
+function readSection(contentDir: string): Pick<ReviewsSection, 'label' | 'heading' | 'subheading'> {
+  const filePath = path.join(contentDir, 'section.json');
+  let raw: string;
+  try {
+    raw = fs.readFileSync(filePath, 'utf8');
+  } catch {
+    return { ...DEFAULTS };
+  }
+
+  let data: unknown;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    return { ...DEFAULTS };
+  }
+
+  if (typeof data !== 'object' || data === null) return { ...DEFAULTS };
+  const d = data as Record<string, unknown>;
+
+  return {
+    label: typeof d.label === 'string' ? d.label : DEFAULTS.label,
+    heading: typeof d.heading === 'string' ? d.heading : DEFAULTS.heading,
+    subheading: typeof d.subheading === 'string' ? d.subheading : DEFAULTS.subheading,
+  };
+}
+
+export function getReviews(opts: ReviewsOptions = {}): ReviewsSection {
   const contentDir = opts.contentDir ?? DEFAULT_CONTENT_DIR;
 
   let entries: string[] = [];
   try {
     entries = fs.readdirSync(contentDir);
   } catch {
-    return [];
+    return { ...DEFAULTS, reviews: [] };
   }
 
-  return entries
+  const reviews = entries
     .filter(name => name.toLowerCase().endsWith('.md'))
     .sort()
     .map(name => name.replace(/\.md$/i, ''))
     .map(id => getReview(id, contentDir))
     .filter((r): r is Review => r !== undefined);
+
+  return { ...readSection(contentDir), reviews };
 }
 
 function getReview(id: string, contentDir: string): Review | undefined {
@@ -46,7 +87,6 @@ function getReview(id: string, contentDir: string): Review | undefined {
     data = parsed.data;
     content = parsed.content;
   } catch {
-    // Missing file or malformed frontmatter — omit rather than crash (mirrors ADR-0003).
     return undefined;
   }
 

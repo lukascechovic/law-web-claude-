@@ -17,7 +17,7 @@ export interface FaqOptions {
   contentDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'texts');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '08-faq');
 const DEFAULT_TITLE = 'Frequently Asked Questions';
 
 /**

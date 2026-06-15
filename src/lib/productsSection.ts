@@ -11,7 +11,7 @@ export interface ProductsSectionOptions {
   contentDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'products');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '03-products');
 
 const DEFAULTS: ProductsSection = {
   label: 'The Collection',

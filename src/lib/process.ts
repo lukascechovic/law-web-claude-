@@ -21,7 +21,7 @@ export interface ProcessOptions {
   imagesDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'process');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '04-process');
 const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public');
 
 const IMAGES_SUBDIR = 'process';

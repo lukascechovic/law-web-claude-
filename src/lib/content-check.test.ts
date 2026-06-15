@@ -115,11 +115,11 @@ describe('checkContent', () => {
 
   it('returns a passing report for a fully valid content directory', () => {
     writeFile(
-      'products/wings.md',
+      '03-products/wings.md',
       '---\ntitle: WINGS\ntagline: Aid\nprice: €10\n---\n- feature',
     );
-    makeImageDir('products/wings', ['wings-01.webp']);
-    writeFile('reviews/01-maria.md', '---\nauthor: Maria\nrole: Archer\n---\nGreat product.');
+    makeImageDir('03-products/wings', ['wings-01.webp']);
+    writeFile('07-reviews/01-maria.md', '---\nauthor: Maria\nrole: Archer\n---\nGreat product.');
 
     const report: ContentReport = checkContent(tmpDir);
 
@@ -128,8 +128,8 @@ describe('checkContent', () => {
   });
 
   it('surfaces errors from invalid product and review files', () => {
-    writeFile('products/wings.md', '---\ntagline: Aid\n---\n- feature'); // missing title & price
-    writeFile('reviews/01-maria.md', '---\nauthor: Maria\n---\nGood.'); // missing role
+    writeFile('03-products/wings.md', '---\ntagline: Aid\n---\n- feature'); // missing title & price
+    writeFile('07-reviews/01-maria.md', '---\nauthor: Maria\n---\nGood.'); // missing role
 
     const report = checkContent(tmpDir);
 
@@ -140,10 +140,10 @@ describe('checkContent', () => {
 
   it('reports a product image folder with no images', () => {
     writeFile(
-      'products/wings.md',
+      '03-products/wings.md',
       '---\ntitle: WINGS\ntagline: Aid\nprice: €10\n---\n- feature',
     );
-    makeImageDir('products/wings', []); // folder exists but empty
+    makeImageDir('03-products/wings', []); // folder exists but empty
 
     const report = checkContent(tmpDir);
 
@@ -153,7 +153,7 @@ describe('checkContent', () => {
 
   it('reports a product with no image folder at all', () => {
     writeFile(
-      'products/arc.md',
+      '03-products/arc.md',
       '---\ntitle: ARC\ntagline: Quiver\nprice: €100\n---\n- feature',
     );
     // no images/arc/ folder created

@@ -1,13 +1,11 @@
 import Image from 'next/image';
-import type { GalleryItem } from '@/lib/gallery';
+import type { GallerySection } from '@/lib/gallery';
 import VideoPlayer from './VideoPlayer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
-interface GalleryProps {
-  items: GalleryItem[];
-}
+type GalleryProps = Omit<GallerySection, never>;
 
-export default function Gallery({ items }: GalleryProps) {
+export default function Gallery({ label, heading, subheading, items }: GalleryProps) {
   return (
     <section
       id="gallery"
@@ -17,13 +15,12 @@ export default function Gallery({ items }: GalleryProps) {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <RevealOnScroll repeat className="text-center mb-16">
-          <p className="section-label mb-3">In Action</p>
+          <p className="section-label mb-3">{label}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
-            The Gear at Full Gallop
+            {heading}
           </h2>
           <p className="mt-4 font-sans text-stone-dark max-w-xl mx-auto text-base leading-relaxed">
-            Riders and their kit on the field — quivers, nocking aids, and
-            bows where they belong.
+            {subheading}
           </p>
         </RevealOnScroll>
 

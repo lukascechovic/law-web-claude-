@@ -52,8 +52,8 @@ export default async function Home() {
             <Products products={products} section={productsSection} />
             <Process process={getProcess()} />
             <Videos {...getVideos()} />
-            <Gallery items={getGallery()} />
-            <Reviews reviews={getReviews()} />
+            <Gallery {...getGallery()} />
+            <Reviews {...getReviews()} />
             <Faq faq={getFaq()} />
           </div>
         </div>

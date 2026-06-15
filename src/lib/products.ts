@@ -25,7 +25,7 @@ export interface CatalogOptions {
   imagesDir?: string;
 }
 
-const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', 'products');
+const DEFAULT_CONTENT_DIR = path.join(process.cwd(), 'content', '03-products');
 const DEFAULT_IMAGES_DIR = path.join(process.cwd(), 'public', 'products');
 
 function parseSpecs(raw: unknown): ProductSpec[] {

@@ -11,7 +11,7 @@ const IMAGE_EXTENSIONS = new Set(['.webp', '.jpg', '.jpeg', '.png']);
 // Discover product image subfolders dynamically so adding a new product is a
 // content edit — drop a folder under content/products/, no code change here.
 // Mirrors the dynamic product discovery in src/lib/products.ts (ADR-0003).
-const productsSourceRoot = 'content/products';
+const productsSourceRoot = 'content/03-products';
 const productImageCopies = existsSync(join(root, productsSourceRoot))
   ? readdirSync(join(root, productsSourceRoot), { withFileTypes: true })
       .filter(entry => entry.isDirectory())
@@ -22,14 +22,14 @@ const productImageCopies = existsSync(join(root, productsSourceRoot))
   : [];
 
 const imageCopies = [
-  ['content/about',   'public/about'],
-  ['content/gallery', 'public/gallery'],
-  ['content/process', 'public/process'],
+  ['content/02-about',   'public/about'],
+  ['content/06-gallery', 'public/gallery'],
+  ['content/04-process', 'public/process'],
   ...productImageCopies,
 ];
 
 const binaryCopies = [
-  ['content/hero',   'public/hero'],
+  ['content/01-hero',   'public/hero'],
   ['content/brand',  'public/brand'],
 ];
 

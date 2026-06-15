@@ -1,11 +1,9 @@
 import { Quote } from 'lucide-react';
-import type { Review } from '@/lib/reviews';
+import type { ReviewsSection } from '@/lib/reviews';
 import VideoPlayer from './VideoPlayer';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
-interface ReviewsProps {
-  reviews: Review[];
-}
+type ReviewsProps = Omit<ReviewsSection, never>;
 
 /** Convert a YouTube watch/share URL into a privacy-friendly embed URL, or null if not YouTube. */
 function youtubeEmbedUrl(url: string): string | null {
@@ -15,7 +13,7 @@ function youtubeEmbedUrl(url: string): string | null {
   return match ? `https://www.youtube-nocookie.com/embed/${match[1]}` : null;
 }
 
-function ReviewMedia({ review }: { review: Review }) {
+function ReviewMedia({ review }: { review: ReviewsSection['reviews'][number] }) {
   if (!review.video) return null;
 
   const embed = youtubeEmbedUrl(review.video);
@@ -43,7 +41,7 @@ function ReviewMedia({ review }: { review: Review }) {
   );
 }
 
-export default function Reviews({ reviews }: ReviewsProps) {
+export default function Reviews({ label, heading, subheading, reviews }: ReviewsProps) {
   if (reviews.length === 0) return null;
 
   return (
@@ -55,13 +53,12 @@ export default function Reviews({ reviews }: ReviewsProps) {
       <div className="mx-auto max-w-7xl">
         {/* Section header */}
         <RevealOnScroll repeat className="text-center mb-20">
-          <p className="section-label mb-3">From the Saddle</p>
+          <p className="section-label mb-3">{label}</p>
           <h2 className="font-serif text-4xl md:text-5xl text-forest-900 leading-tight">
-            What Riders Say
+            {heading}
           </h2>
           <p className="mt-4 font-sans text-stone-mid max-w-xl mx-auto text-base leading-relaxed">
-            Real feedback from horseback archers riding with Lukas Archery Works
-            gear.
+            {subheading}
           </p>
         </RevealOnScroll>
 
